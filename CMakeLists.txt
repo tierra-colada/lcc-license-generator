@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
 SET(CMAKE_DISABLE_SOURCE_CHANGES ON)
 SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 SET(LICENSECC_SHORT_LICENSE "BSD Software License")
+# use static linking
+SET(STATIC_RUNTIME ON)
 
 cmake_policy(SET CMP0048 NEW)
 project (lccgen
