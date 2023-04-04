@@ -69,13 +69,13 @@ else(UNIX) #windows and linux crosscompiling for windows target
 		message(STATUS "architecture detected: ${TARGET_ARCHITECTURE}")
 		
 		#Boost > 3.15 handle the /MD flag more nicely than this
-		# if(${STATIC_RUNTIME})
+		if(${STATIC_RUNTIME})
 			string(REPLACE "/MD" "/MT" CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
 			string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
 			string(REPLACE "/MDd" "/MTd" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 			string(REPLACE "/MDd" "/MTd" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
 			SET(Boost_USE_STATIC_RUNTIME ON)
-		# endif(${STATIC_RUNTIME})
+		endif(${STATIC_RUNTIME})
 		add_definitions("/D _CRT_SECURE_NO_WARNINGS")
 		list(APPEND EXTERNAL_LIBS "bcrypt" "crypt32" "ws2_32" "iphlpapi")
 	else(MSVC)
@@ -99,7 +99,6 @@ if(WIN32 AND "x${CMAKE_CXX_COMPILER_ARCHITECTURE_ID}" STREQUAL "x")
 endif()
 
 SET( Boost_USE_STATIC_LIBS ON )
-SET( Boost_USE_STATIC_RUNTIME ON )
 find_package(Boost REQUIRED COMPONENTS date_time filesystem program_options system unit_test_framework)
 
 #set below in case of dynamic linking in debug.
